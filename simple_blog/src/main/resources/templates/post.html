@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<body>
+
+
+<div class="container">
+
+    <div class="jumbotron">
+
+        <h1 th:text="${post.title}">Title</h1>
+        <div th:text="'Created: ' + ${#dates.format(post.createDate, 'dd-MMM-yyyy')}"></div>
+        <h3 th:text="${post.body}">Body</h3>
+    </div>
+
+    <h2>Comments:</h2>
+
+
+    <div class="well" th:each="comment : ${post.comments}">
+        <h3 th:text="${comment.body}">Body</h3>
+        <div th:text="'Created: ' + ${#dates.format(comment.createDate, 'dd-MMM-yyyy')}">
+        </div>
+    </div>
+
+        <div class="row">
+            <a th:href="@{'/commentPost/{id}'(id=${post.id})}" class="col-md-2">
+                <button type="button" class="btn btn-primary btn-block" th:text="Comment">Comment</button>
+            </a>
+        </div>
+
+</div>
+
+
+</body>
+</html>
